@@ -1,9 +1,9 @@
-FROM python:3.9
+FROM python:3.11-slim-buster
 
-WORKDIR /app
+COPY requirements.txt /usr/src/app/
+WORKDIR /usr/src/app
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requirements.txt .
+COPY . /usr/src/app/
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-COPY . .
+CMD [ "python", "app.py" ]
